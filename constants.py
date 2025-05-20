@@ -50,17 +50,17 @@ BORDER_COLOR = (80, 80, 80)    # Gris medio (bordes)
 # -----------------------------
 
 # Velocidad (frames por caída de pieza)
-INITIAL_FALL_SPEED = 48     # Más alto = más lento
-FALL_SPEED_DECREMENT = 3    # Disminución de velocidad por nivel
-MIN_FALL_SPEED = 6          # Velocidad mínima (más rápido)
+INITIAL_FALL_SPEED = 40     # Más alto = más lento
+FALL_SPEED_DECREMENT = 4    # Disminución de velocidad por nivel
+MIN_FALL_SPEED = 4          # Velocidad mínima (más rápido)
 
 # Puntuaciones
 SCORE_SOFT_DROP = 1          # Puntos por soft drop (caída suave)
 SCORE_HARD_DROP = 2          # Puntos por hard drop (caída dura)
-SCORE_SINGLE = 100           # Puntos por 1 línea
-SCORE_DOUBLE = 300           # Puntos por 2 líneas
-SCORE_TRIPLE = 500           # Puntos por 3 líneas
-SCORE_TETRIS = 800           # Puntos por 4 líneas
+SCORE_SINGLE = 40            # Puntos por 1 línea
+SCORE_DOUBLE = 100           # Puntos por 2 líneas
+SCORE_TRIPLE = 300           # Puntos por 3 líneas
+SCORE_TETRIS = 1200          # Puntos por 4 líneas
 
 # Retraso para eliminación de líneas (ms)
 LINE_CLEAR_DELAY = 200
