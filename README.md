@@ -60,7 +60,7 @@ python main.py
 
 - **7 Piezas Clásicas**: I, O, T, S, Z, J, L con sus rotaciones correspondientes
 - **Previsualización**: Muestra las siguientes 3 piezas
-- **Sistema de Puntuación**: 
+- **Sistema de Puntuación**:
   - Puntos por pieza colocada
   - Bonificación por líneas eliminadas (especialmente por Tetris - 4 líneas)
   - Puntos extra por hard drop
