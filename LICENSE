@@ -6,10 +6,10 @@ Copyright (c) 2025 [ParaDevOne]
 TÉRMINOS Y CONDICIONES
 
 1. DEFINICIONES
-   "El Software" se refiere al programa Tetris y todo el código fuente, 
+   "El Software" se refiere al programa Tetris y todo el código fuente,
    documentación, archivos y recursos asociados distribuidos con este documento.
    "El Autor" se refiere al titular de los derechos de autor mencionado anteriormente.
-   "Usuario" se refiere a cualquier persona o entidad que utilice, copie, modifique 
+   "Usuario" se refiere a cualquier persona o entidad que utilice, copie, modifique
    o distribuya el Software.
 
 2. CONCESIÓN DE DERECHOS
@@ -24,7 +24,7 @@ TÉRMINOS Y CONDICIONES
       o modificada, debe mantener claramente visible este aviso de licencia y dar
       crédito al Autor original, ya sea en la documentación, interfaz de usuario
       o materiales promocionales.
-   
+
    b) NO-RESPONSABILIDAD: El Usuario reconoce que el Software se proporciona "TAL CUAL",
       sin garantías de ningún tipo. El Autor no asumirá responsabilidad por daños
       directos, indirectos, incidentales o consecuentes que resulten del uso del Software.
@@ -38,9 +38,6 @@ TÉRMINOS Y CONDICIONES
    Esta licencia termina automáticamente si el Usuario incumple cualquiera de
    sus términos y condiciones.
 
-Para contactar al Autor acerca de cualquier aspecto de esta licencia:
-[correo@ejemplo.com]
-
 ---
 
 El espíritu de esta licencia es proteger la atribución al Autor original
@@ -48,3 +45,4 @@ mientras se permite la máxima libertad en el uso, modificación y distribución
 del Software sin imponer el requisito de que las obras derivadas deban ser
 de código abierto.
 
+---
