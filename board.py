@@ -2,6 +2,7 @@
 # Módulo para manejar el tablero y la lógica de juego del Tetris
 # Autor: [Tu nombre]
 # Fecha: Mayo 2025
+# Licencia: Simplified Open License (SOL) v1.0
 
 from constants import GRID_WIDTH, GRID_HEIGHT, SCORE_SINGLE, SCORE_DOUBLE, SCORE_TRIPLE, SCORE_TETRIS
 

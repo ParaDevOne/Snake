@@ -2,6 +2,7 @@
 # Módulo para manejar la interfaz gráfica del Tetris
 # Autor: [Tu nombre]
 # Fecha: Mayo 2025
+# Licencia: Simplified Open License (SOL) v1.0
 
 import pygame
 import sys
