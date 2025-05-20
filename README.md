@@ -5,7 +5,7 @@
 
 Un juego clásico de Tetris implementado en Python usando Pygame, con una arquitectura modular y características modernas.
 
-![Tetris Screenshot](tetris_screenshot.png)
+![Tetris Screenshot](./content/tetris_screenshot.png)
 
 ## Descripción
 
