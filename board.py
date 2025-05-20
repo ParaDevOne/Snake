@@ -103,8 +103,8 @@ class Board:
         # Actualizar contador de líneas eliminadas
         self.lines_cleared += len(lines_to_clear)
         
-        # Actualizar nivel (cada 10 líneas)
-        self.level = (self.lines_cleared // 10) + 1
+        # Actualizar nivel (cada 5 líneas)
+        self.level = (self.lines_cleared // 5) + 1
         
         return len(lines_to_clear)
     
