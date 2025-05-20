@@ -1,5 +1,8 @@
 # Tetris
 
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+![License](https://img.shields.io/badge/license-SOL%201.0-brightgreen.svg)
+
 Un juego clásico de Tetris implementado en Python usando Pygame, con una arquitectura modular y características modernas.
 
 ![Tetris Screenshot](tetris_screenshot.png)
@@ -82,5 +85,13 @@ Desarrollado como proyecto educativo inspirado en el clásico juego Tetris cread
 
 ## Licencia
 
-Este proyecto es de uso libre para fines educativos y personales.
+Este proyecto está disponible bajo la **Simplified Open License (SOL) versión 1.0**.
 
+Esta licencia permite:
+- Uso libre del software para cualquier propósito, incluyendo comercial
+- Modificación y distribución del código
+- Creación de trabajos derivados sin obligación de hacerlos open source
+
+Con la única condición de mantener la atribución al autor original.
+
+Para más detalles, consulta el archivo [LICENSE](LICENSE) incluido en este repositorio.

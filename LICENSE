@@ -1,22 +1,50 @@
-MIT License
+SIMPLIFIED OPEN LICENSE (SOL)
+Version 1.0, Mayo 2025
 
 Copyright (c) 2025 [ParaDevOne]
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, not and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+TÉRMINOS Y CONDICIONES
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+1. DEFINICIONES
+   "El Software" se refiere al programa Tetris y todo el código fuente, 
+   documentación, archivos y recursos asociados distribuidos con este documento.
+   "El Autor" se refiere al titular de los derechos de autor mencionado anteriormente.
+   "Usuario" se refiere a cualquier persona o entidad que utilice, copie, modifique 
+   o distribuya el Software.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+2. CONCESIÓN DE DERECHOS
+   Se concede permiso, sin costo alguno, a cualquier Usuario para:
+   - Usar el Software sin restricciones
+   - Copiar y distribuir el Software
+   - Modificar el Software y distribuir versiones modificadas
+   - Utilizar el Software para fines comerciales
+
+3. CONDICIONES
+   a) ATRIBUCIÓN: Cualquier distribución del Software, ya sea en su forma original
+      o modificada, debe mantener claramente visible este aviso de licencia y dar
+      crédito al Autor original, ya sea en la documentación, interfaz de usuario
+      o materiales promocionales.
+   
+   b) NO-RESPONSABILIDAD: El Usuario reconoce que el Software se proporciona "TAL CUAL",
+      sin garantías de ningún tipo. El Autor no asumirá responsabilidad por daños
+      directos, indirectos, incidentales o consecuentes que resulten del uso del Software.
+
+4. COMPATIBILIDAD
+   Esta licencia es compatible con el uso del Software en proyectos que utilizan
+   licencias más restrictivas en otras partes, siempre que se cumplan las condiciones
+   de atribución mencionadas en el apartado 3.a.
+
+5. TERMINACIÓN
+   Esta licencia termina automáticamente si el Usuario incumple cualquiera de
+   sus términos y condiciones.
+
+Para contactar al Autor acerca de cualquier aspecto de esta licencia:
+[correo@ejemplo.com]
+
+---
+
+El espíritu de esta licencia es proteger la atribución al Autor original
+mientras se permite la máxima libertad en el uso, modificación y distribución
+del Software sin imponer el requisito de que las obras derivadas deban ser
+de código abierto.
 
