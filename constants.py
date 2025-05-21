@@ -1,6 +1,6 @@
 # constants.py
 # Módulo de constantes para el juego Tetris
-# Autor: [Tu nombre]
+# Autor: [ParaDevOne]
 # Fecha: Mayo 2025
 
 import pygame

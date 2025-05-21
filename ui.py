@@ -1,6 +1,6 @@
 # ui.py
 # Módulo para manejar la interfaz gráfica del Tetris
-# Autor: [Tu nombre]
+# Autor: [ParaDevOne]
 # Fecha: Mayo 2025
 # Licencia: Simplified Open License (SOL) v1.0
 
