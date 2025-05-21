@@ -1,0 +1,18 @@
+# CHALELOG.txt
+
+## v1.0.0 (21-05-2025)
+- Versión inicial pública del Tetris.
+- 7 piezas clásicas con rotaciones completas.
+- Sistema de puntuación solo por líneas eliminadas.
+- Dificultad progresiva por niveles.
+- Guardado y visualización de récords con nombre de jugador.
+- Interfaz gráfica moderna y menús intuitivos.
+- Vista previa de próximas 3 piezas.
+- Compatible únicamente con Windows.
+- Licencia Simplified Open License (SOL) v1.0.
+
+## Próximas versiones
+- Mejoras de compatibilidad multiplataforma.
+- Nuevos efectos de sonido y música.
+- Opciones de personalización visual y para ver los controles.
+- Corrección de bugs reportados por usuarios.
