@@ -1,5 +1,7 @@
 # Tetris
 
+> **Aviso:** Este juego solo es compatible y ha sido probado en **Windows**.
+
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![License](https://img.shields.io/badge/license-SOL%201.0-brightgreen.svg)
 
@@ -21,21 +23,20 @@ Esta implementación del clásico juego Tetris incluye todas las funcionalidades
 ## Instalación
 
 1. Clona o descarga este repositorio.
+
 2. Asegúrate de tener Python instalado en tu sistema.
+
 3. Crea un entorno virtual (opcional pero recomendado):
    ```
    python -m venv venv
    ```
-4. Activa el entorno virtual:
-   - En Windows:
-     ```
-     .\venv\Scripts\activate
-     ```
-   - En macOS/Linux:
-     ```
-     source venv/bin/activate
-     ```
-5. Instala las dependencias:
+
+5. Activa el entorno virtual:
+    ```
+    .\venv\Scripts\activate
+    ```
+
+6. Instala las dependencias:
    ```
    pip install -r requirements.txt
    ```
@@ -78,10 +79,6 @@ El juego está estructurado de forma modular para facilitar su mantenimiento y e
 - **score.py**: Sistema de puntuación y récords
 - **ui.py**: Interfaz gráfica
 - **constants.py**: Configuraciones y constantes
-
-## Créditos
-
-Desarrollado como proyecto educativo inspirado en el clásico juego Tetris creado por Alexey Pajitnov en 1984.
 
 ## Licencia
 
