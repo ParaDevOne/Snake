@@ -1,6 +1,6 @@
 # board.py
 # Módulo para manejar el tablero y la lógica de juego del Tetris
-# Autor: [Tu nombre]
+# Autor: [ParaDevOne]
 # Fecha: Mayo 2025
 # Licencia: Simplified Open License (SOL) v1.0
 
@@ -111,15 +111,13 @@ class Board:
     
     def update_score(self, lines_removed):
         """
-        Actualiza la puntuación basada en el número de líneas eliminadas.
-        
+        Actualiza la puntuación basada únicamente en el número de líneas eliminadas.
         Args:
             lines_removed (int): Número de líneas eliminadas
         """
         if lines_removed == 0:
             return
-        
-        # Calcular puntos según número de líneas eliminadas
+        # Calcular puntos solo por líneas eliminadas
         points = 0
         if lines_removed == 1:
             points = SCORE_SINGLE
@@ -129,7 +127,6 @@ class Board:
             points = SCORE_TRIPLE
         elif lines_removed >= 4:
             points = SCORE_TETRIS
-        
         # Multiplicar puntos por nivel actual
         self.score += points * self.level
     

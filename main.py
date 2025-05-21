@@ -1,6 +1,6 @@
 # main.py
 # Punto de entrada principal del juego Tetris
-# Autor: [Tu nombre]
+# Autor: [ParaDevOne]
 # Fecha: Mayo 2025
 # Licencia: Simplified Open License (SOL) v1.0
 
@@ -78,6 +78,9 @@ class Game:
             # Inicializar componentes específicos del juego
             self._init_game()
             
+            # Reproducir música del menú principal
+            # self.sound.play_music("title", loop=True)
+            
             logging.info("Juego Tetris inicializado correctamente")
         except Exception as e:
             logging.error(f"Error al inicializar el juego: {e}")
@@ -112,6 +115,9 @@ class Game:
         
         # Reiniciar puntuación
         self.score_manager.reset_score()
+        
+        if hasattr(self, '_game_over_sound_played'):
+            self._game_over_sound_played = False
         
         logging.info("Componentes del juego inicializados")
     
@@ -318,11 +324,7 @@ class Game:
                     # Añadir carácter
                     if event.unicode.isalnum() or event.unicode in " -_":
                         self.player_name += event.unicode
-        else:
-            # Sin récord, solo esperar ENTER para continuar
-            if event.type == pygame.KEYDOWN and event.key == KEY_ENTER:
-                self.state = GameState.MENU
-                self.ui.selected_option = 0
+
     
     def _handle_rankings_events(self, event):
         """
@@ -547,7 +549,7 @@ if __name__ == "__main__":
         # Configurar driver de video para Windows
         if os.name == 'nt':
             # Intentar diferentes drivers en orden de preferencia
-            drivers = ['directx', 'windows', 'windib']
+            drivers = ['windows', 'windib', 'directx']
             driver_set = False
             
             for driver in drivers:
