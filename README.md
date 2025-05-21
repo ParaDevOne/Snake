@@ -5,6 +5,7 @@ Más información **abajo**
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![License](https://img.shields.io/badge/license-SOL%201.0-brightgreen.svg)
+![Windows](https://img.shields.io/badge/platform-Windows-blue.svg)
 
 Un juego clásico de Tetris implementado en Python usando Pygame, con una arquitectura modular y características modernas.
 
