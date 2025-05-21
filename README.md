@@ -1,6 +1,7 @@
 # Tetris
 
-> **Aviso:** Este juego solo es compatible y ha sido probado en **Windows**.
+> **Aviso:** Este juego solo es compatible y ha sido probado en Windows.
+Más información **abajo**
 
 ![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
 ![License](https://img.shields.io/badge/license-SOL%201.0-brightgreen.svg)
@@ -12,19 +13,20 @@ Un juego clásico de Tetris implementado en Python usando Pygame, con una arquit
 ## Descripción
 
 Esta implementación del clásico juego Tetris incluye todas las funcionalidades originales, como las siete piezas estándar, sistema de rotación, incremento de dificultad por niveles y puntuación. Además, incorpora funciones adicionales como previsualización de próximas piezas, guardado de récords y una interfaz de usuario intuitiva.
+Versión 1.0 del juego
 
 ## Requisitos del Sistema
 
 - Python 3.7 o superior
-- Sistema operativo: Windows, macOS o Linux
-- Espacio en disco: ~10MB
-- Memoria RAM: 100MB o más
+- Sistema operativo: Windows
+- Espacio en disco: ~50MB
+- Memoria RAM: 100MB o más (la que usa el SO no se incluye)
 
 ## Instalación
 
 1. Clona o descarga este repositorio.
 
-2. Asegúrate de tener Python instalado en tu sistema.
+2. Asegúrate de tener Python instalado en tu sistema o descargaló en releases.
 
 3. Crea un entorno virtual (opcional pero recomendado):
    ```
@@ -80,6 +82,7 @@ El juego está estructurado de forma modular para facilitar su mantenimiento y e
 - **ui.py**: Interfaz gráfica
 - **constants.py**: Configuraciones y constantes
 
+
 ## Licencia
 
 Este proyecto está disponible bajo la **Simplified Open License (SOL) versión 1.0**.
@@ -92,3 +95,7 @@ Esta licencia permite:
 Con la única condición de mantener la atribución al autor original.
 
 Para más detalles, consulta el archivo [LICENSE](LICENSE) incluido en este repositorio.
+
+## Porque solo es para Windows:
+
+- **Solo es para Windows** porque los drivers que están en el codigó estan hechos asin paramayor funcionalidad
