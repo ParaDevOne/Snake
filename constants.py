@@ -3,6 +3,7 @@
 # Autor: [ParaDevOne]
 # Fecha: Mayo 2025
 
+from typing import Literal
 import pygame
 
 # -----------------------------
@@ -10,8 +11,8 @@ import pygame
 # -----------------------------
 
 # Dimensiones de la ventana (píxeles)
-WINDOW_WIDTH = 800
-WINDOW_HEIGHT = 600
+WINDOW_WIDTH = 1200
+WINDOW_HEIGHT = 800
 
 # Dimensiones del tablero (celdas)
 GRID_WIDTH = 10
@@ -28,7 +29,7 @@ FPS = 60
 # -----------------------------
 
 # Colores de las piezas
-COLORS = {
+COLORS: dict[str, tuple[int, int, int]] = {
     "I": (0, 240, 240),   # Cian
     "O": (240, 240, 0),   # Amarillo
     "T": (160, 0, 240),   # Púrpura
@@ -39,11 +40,11 @@ COLORS = {
 }
 
 # Colores de la interfaz
-BG_COLOR = (0, 0, 0)           # Negro (fondo general)
-GRID_COLOR = (50, 50, 50)      # Gris oscuro (líneas de cuadrícula)
-TEXT_COLOR = (255, 255, 255)   # Blanco (texto general)
-UI_BG_COLOR = (30, 30, 30)     # Gris muy oscuro (fondos de la interfaz)
-BORDER_COLOR = (80, 80, 80)    # Gris medio (bordes)
+BG_COLOR: tuple[Literal[0], Literal[0], Literal[0]] = (0, 0, 0)           # Negro (fondo general)
+GRID_COLOR: tuple[Literal[50], Literal[50], Literal[50]] = (50, 50, 50)      # Gris oscuro (líneas de cuadrícula)
+TEXT_COLOR: tuple[Literal[255], Literal[255], Literal[255]] = (255, 255, 255)   # Blanco (texto general)
+UI_BG_COLOR: tuple[Literal[30], Literal[30], Literal[30]] = (30, 30, 30)     # Gris muy oscuro (fondos de la interfaz)
+BORDER_COLOR: tuple[Literal[80], Literal[80], Literal[80]] = (80, 80, 80)    # Gris medio (bordes)
 
 # -----------------------------
 # Configuración del juego
@@ -77,7 +78,7 @@ Las formas se representan como matrices donde:
 """
 
 # Definición de las formas de las piezas con sus cuatro rotaciones
-SHAPES = {
+SHAPES: dict[str, list[list[list[int]]]] = {
     # Pieza I (línea)
     "I": [
         # Rotación 0°
@@ -277,14 +278,14 @@ SHAPES = {
 # -----------------------------
 
 # Teclas de movimiento
-KEY_LEFT = pygame.K_LEFT
-KEY_RIGHT = pygame.K_RIGHT
-KEY_DOWN = pygame.K_DOWN
-KEY_ROTATE = pygame.K_UP
-KEY_HARD_DROP = pygame.K_SPACE
+KEY_LEFT: int = pygame.K_LEFT
+KEY_RIGHT: int = pygame.K_RIGHT
+KEY_DOWN: int = pygame.K_DOWN
+KEY_ROTATE: int = pygame.K_UP
+KEY_HARD_DROP: int = pygame.K_SPACE
 
 # Teclas de menú
-KEY_PAUSE = pygame.K_p
-KEY_ESCAPE = pygame.K_ESCAPE
-KEY_ENTER = pygame.K_RETURN
+KEY_PAUSE: int = pygame.K_p
+KEY_ESCAPE: int = pygame.K_ESCAPE
+KEY_ENTER: int = pygame.K_RETURN
 
