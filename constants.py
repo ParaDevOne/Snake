@@ -51,9 +51,9 @@ BORDER_COLOR: tuple[Literal[80], Literal[80], Literal[80]] = (80, 80, 80)    # G
 # -----------------------------
 
 # Velocidad (frames por caída de pieza)
-INITIAL_FALL_SPEED = 40     # Más alto = más lento
-FALL_SPEED_DECREMENT = 4    # Disminución de velocidad por nivel
-MIN_FALL_SPEED = 4          # Velocidad mínima (más rápido)
+INITIAL_FALL_SPEED = 50     # Más alto = más lento
+FALL_SPEED_DECREMENT = 5    # Disminución de velocidad por nivel
+MIN_FALL_SPEED = 1          # Velocidad mínima (más rápido)
 
 # Puntuaciones
 SCORE_SOFT_DROP = 1          # Puntos por soft drop (caída suave)
