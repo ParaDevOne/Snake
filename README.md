@@ -14,7 +14,7 @@ Un juego clásico de Tetris implementado en Python usando Pygame, con una arquit
 ## Descripción
 
 Esta implementación del clásico juego Tetris incluye todas las funcionalidades originales, como las siete piezas estándar, sistema de rotación, incremento de dificultad por niveles y puntuación. Además, incorpora funciones adicionales como previsualización de próximas piezas, guardado de récords y una interfaz de usuario intuitiva.
-Versión 1.1 del juego
+Versión 1.2 del juego
 
 ## Requisitos del Sistema
 
