@@ -1,6 +1,6 @@
 # CHALELOG.txt
 
-## v1.0.0 (21-05-2025)
+## v1.0 (21-05-2025)
 - Versión inicial pública del Tetris.
 - 7 piezas clásicas con rotaciones completas.
 - Sistema de puntuación solo por líneas eliminadas.
@@ -11,8 +11,22 @@
 - Compatible únicamente con Windows.
 - Licencia Simplified Open License (SOL) v1.0.
 
+## v1.1 (24-05-2025)
+- Añadida compatibilidad básica con Linux.
+- Opción para cambiar el color de fondo del tablero.
+- Corrección de bug: las piezas ya no se quedan atascadas al rotar cerca de los bordes.
+
+## v1.2 (próxima)
+- Soporte experimental para MacOS.
+- Vista rápida de controles desde el menú principal.
+- Mejora en la animación de eliminación de líneas.
+- Guardado automático de la partida al salir.
+
 ## Próximas versiones
-- Mejoras de compatibilidad multiplataforma.
 - Nuevos efectos de sonido y música.
 - Opciones de personalización visual y para ver los controles.
 - Corrección de bugs reportados por usuarios.
+- Logros y retos desbloqueables.
+- Estadísticas detalladas de partidas y progreso.
+- Traducción a más idiomas.
+- Mejoras en accesibilidad visual y auditiva.
