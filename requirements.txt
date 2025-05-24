@@ -1,3 +1,11 @@
 # Dependencias para el juego Tetris
 pygame>=2.5.0
 logger>=1.4
+sys>=0.9.0
+os>=0.9.0
+json>=2.0.9
+typing>=3.7
+time>=0.9.0
+enum>=0.4.7
+random>=0.4.7
+datetime>=4.3.3
