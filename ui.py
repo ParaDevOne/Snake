@@ -57,8 +57,9 @@ class GameUI:
         
         # Fuentes para texto
         self.title_font: Font = pygame.font.SysFont('Arial', 48, bold=True)
-        self.large_font: Font = pygame.font.SysFont('Arial', 36, bold=True)
-        self.medium_font: Font = pygame.font.SysFont('Arial', 24)
+        self.large_font: Font = pygame.font.SysFont('Arial', 38, bold=True)  # Aumentado de 36 a 38
+        self.score_font: Font = pygame.font.SysFont('Arial', 42, bold=True)  # Nueva fuente más grande para puntuación
+        self.medium_font: Font = pygame.font.SysFont('Arial', 26)  # Aumentado de 24 a 26
         self.small_font: Font = pygame.font.SysFont('Arial', 18)
         
         # Gestor de puntuaciones
@@ -294,6 +295,7 @@ class GameUI:
     def draw_score_panel(self, current_score, level, lines, highscore):
         """
         Dibuja el panel con puntuación, nivel y líneas.
+        Mejorado con mejor visibilidad y espacio optimizado.
         
         Args:
             current_score (int): Puntuación actual
@@ -304,37 +306,58 @@ class GameUI:
         # Posición en y (debajo de próximas piezas)
         y_pos: int = self.next_pieces_y + 250
         
-        # Dibujar fondo
+        # Dibujar fondo principal
         pygame.draw.rect(
             self.window,
             UI_BG_COLOR,
-            (self.sidebar_x, y_pos, self.sidebar_width, 180)
+            (self.sidebar_x, y_pos, self.sidebar_width, 190)  # Aumentado altura de 180 a 190
+        )
+        
+        # Añadir borde sutil para mejorar la visibilidad
+        pygame.draw.rect(
+            self.window,
+            BORDER_COLOR,
+            (self.sidebar_x, y_pos, self.sidebar_width, 190),
+            2  # Borde de 2 píxeles
         )
         
         # Formatear puntuaciones
         score_str = self.score_manager.format_score(current_score)
         high_str = self.score_manager.format_score(highscore)
         
-        # Dibujar textos
+        # Dibujar textos con mejor espaciado
         self.draw_text("Puntuación", self.medium_font, TEXT_COLOR, 
                     self.sidebar_x + 10, y_pos + 10)
-        self.draw_text(score_str, self.large_font, TEXT_COLOR, 
-                    self.sidebar_x + 10, y_pos + 40)
+                    
+        # Fondo destacado para la puntuación actual
+        score_width = self.score_font.size(score_str)[0] + 20  # Ancho del texto + margen
+        score_height = self.score_font.get_height() + 8  # Alto del texto + margen
         
-        self.draw_text("Nivel", self.medium_font, TEXT_COLOR, 
-                    self.sidebar_x + 10, y_pos + 80)
-        self.draw_text(str(level), self.medium_font, TEXT_COLOR, 
-                    self.sidebar_x + 70, y_pos + 80)
+        # Dibujar fondo semi-transparente para destacar la puntuación
+        score_bg = pygame.Surface((score_width, score_height), pygame.SRCALPHA)
+        score_bg.fill((100, 100, 255, 60))  # Azul semi-transparente
+        self.window.blit(score_bg, (self.sidebar_x + 5, y_pos + 38))
         
-        self.draw_text("Líneas", self.medium_font, TEXT_COLOR, 
-                    self.sidebar_x + 10, y_pos + 110)
-        self.draw_text(str(lines), self.medium_font, TEXT_COLOR, 
-                    self.sidebar_x + 70, y_pos + 110)
+        # Dibujar puntuación con fuente más grande
+        self.draw_text(score_str, self.score_font, TEXT_COLOR, 
+                    self.sidebar_x + 15, y_pos + 40)
         
+        # Nivel y líneas en una sola fila para mejor distribución
+        self.draw_text("Nivel:", self.medium_font, TEXT_COLOR, 
+                    self.sidebar_x + 10, y_pos + 90)
+        self.draw_text(str(level), self.large_font, TEXT_COLOR, 
+                    self.sidebar_x + 80, y_pos + 88)
+        
+        self.draw_text("Líneas:", self.medium_font, TEXT_COLOR, 
+                    self.sidebar_x + 130, y_pos + 90)
+        self.draw_text(str(lines), self.large_font, TEXT_COLOR, 
+                    self.sidebar_x + 200, y_pos + 88)
+        
+        # Récord con mejor visibilidad
         self.draw_text("Récord", self.medium_font, TEXT_COLOR, 
                     self.sidebar_x + 10, y_pos + 140)
         self.draw_text(high_str, self.medium_font, TEXT_COLOR, 
-                    self.sidebar_x + 70, y_pos + 140)
+                    self.sidebar_x + 90, y_pos + 140)
     
     def draw_main_menu(self):
         """
@@ -471,6 +494,80 @@ class GameUI:
         else:
             text_rect = text_surface.get_rect(topleft=(x, y))
         self.window.blit(text_surface, text_rect)
+
+    def show_score_effect(self, points, level=1):
+        """
+        Muestra un efecto visual cuando el jugador obtiene puntos.
+        
+        Args:
+            points (int): Puntos obtenidos
+            level (int): Nivel actual
+        """
+        if not points or not pygame.display.get_surface():
+            return
+            
+        # Calcular puntos totales con multiplicador de nivel
+        total_points = points * level
+        
+        # Formatear puntos
+        points_str = f"+{self.score_manager.format_score(total_points)}"
+        
+        # Crear texto
+        color = (255, 255, 150)  # Amarillo claro
+        points_text = self.large_font.render(points_str, True, color)
+        
+        # Posición centrada sobre el tablero
+        text_rect = points_text.get_rect(
+            center=(self.board_x + self.board_width // 2, self.board_y + self.board_height // 3)
+        )
+        
+        # Mostrar efecto por un breve momento
+        self.window.blit(points_text, text_rect)
+        pygame.display.update(text_rect)
+        pygame.time.delay(600)  # 600ms
+    
+    def flash_lines(self, board, lines_to_clear):
+        """
+        Crea un efecto visual de destello para las líneas que se van a eliminar.
+        
+        Args:
+            board: Tablero de juego
+            lines_to_clear (list): Lista de índices de las líneas a eliminar
+        """
+        if not lines_to_clear or not pygame.display.get_surface():
+            return
+            
+        # Guardar el estado original de las líneas
+        original_grid = board.get_board_state()
+        
+        # Realizar el efecto de flash (3 destellos)
+        flash_colors = [
+            (255, 255, 255),  # Blanco
+            (220, 220, 100),  # Amarillo claro
+            (180, 180, 255)   # Azul claro
+        ]
+        
+        for flash_color in flash_colors:
+            # Cambiar el color de las líneas a eliminar
+            for y in lines_to_clear:
+                for x in range(len(original_grid[y])):
+                    if original_grid[y][x] is not None:
+                        # Dibujar celda con el color de destello
+                        self.draw_cell(x, y, flash_color)
+                        
+            # Actualizar la pantalla
+            pygame.display.update()
+            pygame.time.delay(100)  # 100ms entre destellos
+            
+            # Restaurar el color original
+            for y in lines_to_clear:
+                for x in range(len(original_grid[y])):
+                    if original_grid[y][x] is not None:
+                        self.draw_cell(x, y, original_grid[y][x])
+                        
+            # Actualizar la pantalla
+            pygame.display.update()
+            pygame.time.delay(50)  # 50ms entre restauraciones
     
     def handle_menu_input(self, event, options):
         """
