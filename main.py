@@ -13,7 +13,7 @@ from enum import Enum, auto
 import traceback
 
 from board import Board
-from pieces import PieceGenerator
+from pieces import PieceGenerator, Piece
 from score import ScoreManager
 from ui import GameUI
 from constants import (

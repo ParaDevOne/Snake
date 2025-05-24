@@ -35,7 +35,7 @@ Esta implementación del clásico juego Tetris incluye todas las funcionalidades
 4. Activa el entorno virtual:
    - En Windows:
      ```
-     .\venv\Scripts\Activate.ps1
+     .\venv\Scripts\activate
      ```
    - En Linux/MacOS:
      ```
