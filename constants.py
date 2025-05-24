@@ -40,11 +40,11 @@ COLORS: dict[str, tuple[int, int, int]] = {
 }
 
 # Colores de la interfaz
-BG_COLOR: tuple[Literal[0], Literal[0], Literal[0]] = (0, 0, 0)           # Negro (fondo general)
-GRID_COLOR: tuple[Literal[50], Literal[50], Literal[50]] = (50, 50, 50)      # Gris oscuro (líneas de cuadrícula)
-TEXT_COLOR: tuple[Literal[255], Literal[255], Literal[255]] = (255, 255, 255)   # Blanco (texto general)
-UI_BG_COLOR: tuple[Literal[30], Literal[30], Literal[30]] = (30, 30, 30)     # Gris muy oscuro (fondos de la interfaz)
-BORDER_COLOR: tuple[Literal[80], Literal[80], Literal[80]] = (80, 80, 80)    # Gris medio (bordes)
+BG_COLOR: tuple[Literal[10], Literal[10], Literal[30]] = (10, 10, 30)      # Azul muy oscuro (fondo general)
+GRID_COLOR: tuple[Literal[60], Literal[60], Literal[70]] = (60, 60, 70)      # Gris azulado (líneas de cuadrícula)
+TEXT_COLOR: tuple[Literal[240], Literal[240], Literal[255]] = (240, 240, 255)  # Blanco azulado (texto general)
+UI_BG_COLOR: tuple[Literal[25], Literal[25], Literal[40]] = (25, 25, 40)     # Azul oscuro (fondos de la interfaz)
+BORDER_COLOR: tuple[Literal[100], Literal[100], Literal[120]] = (100, 100, 120)  # Gris azulado medio (bordes)
 
 # -----------------------------
 # Configuración del juego
@@ -55,9 +55,7 @@ INITIAL_FALL_SPEED = 150     # Más alto = más lento
 FALL_SPEED_DECREMENT = 5    # Disminución de velocidad por nivel
 MIN_FALL_SPEED = 1          # Velocidad mínima (más rápido)
 
-# Puntuaciones
-SCORE_SOFT_DROP = 1          # Puntos por soft drop (caída suave)
-SCORE_HARD_DROP = 2          # Puntos por hard drop (caída dura)
+# Puntuaciones (solo por líneas completadas)
 SCORE_SINGLE = 40            # Puntos por 1 línea
 SCORE_DOUBLE = 100           # Puntos por 2 líneas
 SCORE_TRIPLE = 300           # Puntos por 3 líneas
