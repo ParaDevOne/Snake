@@ -78,9 +78,10 @@ class Game:
             # Inicializar componentes específicos del juego
             self._init_game()
             
-            # Reproducir música del menú principal
-            # self.sound.play_music("title", loop=True)
-            
+            # Configurar icono de la ventana
+            icon: pygame.Surface = pygame.image.load("./content/images/icon.ico")
+            pygame.display.set_icon(icon)
+
             logging.info("Juego Tetris inicializado correctamente")
         except Exception as e:
             logging.error(f"Error al inicializar el juego: {e}")
@@ -130,8 +131,8 @@ class Game:
             
             # Variables para medir rendimiento
             frame_count = 0
-            start_time = time.time()
-            last_fps_log = start_time
+            start_time: float = time.time()
+            last_fps_log: float = start_time
             
             # Bucle principal
             while self.running:
@@ -160,19 +161,16 @@ class Game:
                         # Otro tipo de error, continuar si es posible
                         logging.warning("Continuando a pesar del error...")
                 
-                # Controlar FPS
-                actual_fps = self.clock.tick(FPS)
-                
                 # Incrementar contador de frames
                 frame_count += 1
                 
                 # Registrar FPS cada 5 segundos
-                current_time = time.time()
+                current_time: float = time.time()
                 if current_time - last_fps_log > 5:
-                    avg_fps = frame_count / (current_time - last_fps_log)
+                    avg_fps: float = frame_count / (current_time - last_fps_log)
                     logging.debug(f"FPS promedio: {avg_fps:.2f}")
                     frame_count = 0
-                    last_fps_log = current_time
+                    last_fps_log: float = current_time
         
         except KeyboardInterrupt:
             logging.info("Juego interrumpido manualmente")
@@ -264,7 +262,7 @@ class Game:
                 
             # Guardar la última tecla presionada para repetición
             self.last_key = event.key
-            self.last_key_time = pygame.time.get_ticks()
+            self.last_key_time: int = pygame.time.get_ticks()
             
             # Aplicar el movimiento inmediatamente
             self._apply_key_movement(event.key)
@@ -348,7 +346,7 @@ class Game:
         """
         Actualiza el estado del juego durante el gameplay.
         """
-        current_time = pygame.time.get_ticks()
+        current_time: int = pygame.time.get_ticks()
         
         # Manejar repetición de teclas
         if self.last_key and current_time - self.last_key_time > self.key_repeat_delay:
@@ -358,13 +356,13 @@ class Game:
             self.last_key_time = current_time - (self.key_repeat_interval - self.key_repeat_delay)
         
         # Calcular velocidad de caída según nivel
-        level_fall_speed = max(
+        level_fall_speed: int = max(
             MIN_FALL_SPEED,
             INITIAL_FALL_SPEED - (self.board.level - 1) * FALL_SPEED_DECREMENT
         )
         
         # Aplicar soft drop (caída rápida)
-        fall_speed = level_fall_speed // 4 if self.soft_drop_active else level_fall_speed
+        fall_speed: int = level_fall_speed // 4 if self.soft_drop_active else level_fall_speed
         
         # Incrementar contador
         self.fall_counter += 1
@@ -500,7 +498,7 @@ class Game:
                 pygame.draw.rect(self.ui.window, (100, 100, 100), text_bg_rect, 2)
                 
                 # Mostrar texto de entrada
-                name_text = f"Nombre: {self.player_name}"
+                name_text: str = f"Nombre: {self.player_name}"
                 if pygame.time.get_ticks() % 1000 < 500:
                     name_text += "|"  # Cursor parpadeante
                 self.ui.draw_text(
@@ -546,12 +544,23 @@ class Game:
 # Punto de entrada principal
 if __name__ == "__main__":
     try:
-        # Configurar driver de video para Windows
+        # Configurar driver de video según el sistema operativo
+        drivers: list[str] = []
+        driver_set = False
         if os.name == 'nt':
-            # Intentar diferentes drivers en orden de preferencia
-            drivers = ['windows', 'windib', 'directx']
-            driver_set = False
-            
+            # Windows
+            drivers = ['windows']
+        elif sys.platform.startswith("linux"):
+            # Linux
+            drivers = ['wayland', 'x11', 'fbcon', 'directfb', 'svgalib']
+        elif sys.platform == "darwin":
+            # macOS
+            drivers = ['cocoa']
+        else:
+            # Otros sistemas
+            drivers = ['windows', 'wayland', 'cocoa']
+
+
             for driver in drivers:
                 try:
                     os.environ["SDL_VIDEODRIVER"] = driver
