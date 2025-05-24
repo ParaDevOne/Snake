@@ -5,10 +5,9 @@
 # Licencia: Simplified Open License (SOL) v1.0
 
 import pygame
-import sys
-import time
-import os
 import logging
+
+from pygame.font import Font
 from constants import (
     WINDOW_WIDTH, WINDOW_HEIGHT, GRID_WIDTH, GRID_HEIGHT, 
     CELL_SIZE, COLORS, BG_COLOR, GRID_COLOR, TEXT_COLOR,
@@ -43,7 +42,7 @@ class GameUI:
             
             # Crear ventana con configuración básica
             logging.info("Creando ventana con configuración básica...")
-            self.window = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
+            self.window: pygame.Surface = pygame.display.set_mode((WINDOW_WIDTH, WINDOW_HEIGHT))
             logging.info("Ventana creada correctamente")
             
             # Inicializar el subsistema de fuentes
@@ -57,14 +56,14 @@ class GameUI:
             raise
         
         # Fuentes para texto
-        self.title_font = pygame.font.SysFont('Arial', 48, bold=True)
-        self.large_font = pygame.font.SysFont('Arial', 36, bold=True)
-        self.medium_font = pygame.font.SysFont('Arial', 24)
-        self.small_font = pygame.font.SysFont('Arial', 18)
+        self.title_font: Font = pygame.font.SysFont('Arial', 48, bold=True)
+        self.large_font: Font = pygame.font.SysFont('Arial', 36, bold=True)
+        self.medium_font: Font = pygame.font.SysFont('Arial', 24)
+        self.small_font: Font = pygame.font.SysFont('Arial', 18)
         
         # Gestor de puntuaciones
         self.score_manager = score_manager
-        
+
         # Reloj para controlar FPS
         self.clock = pygame.time.Clock()
         
@@ -75,7 +74,7 @@ class GameUI:
         self.current_state = "main"
         
         # Opciones de menú
-        self.menu_options = {
+        self.menu_options: dict[str, list[str]] = {
             "main": ["Jugar", "Rankings", "Salir"],
             "pause": ["Continuar", "Reiniciar", "Salir al Menú"]
         }
@@ -100,7 +99,7 @@ class GameUI:
         # Área de próximas piezas
         self.next_pieces_x = self.sidebar_x + 10
         self.next_pieces_y = self.sidebar_y + 40
-        self.next_piece_size = CELL_SIZE * 0.8
+        self.next_piece_size: float = CELL_SIZE * 0.8
         
     def draw_board(self, board):
         """
@@ -209,8 +208,8 @@ class GameUI:
         cell_size = size if size is not None else CELL_SIZE
         
         # Offset del tablero (solo si no es vista previa)
-        offset_x = self.board_x if board_offset else 0
-        offset_y = self.board_y if board_offset else 0
+        offset_x: int = self.board_x if board_offset else 0
+        offset_y: int = self.board_y if board_offset else 0
         
         # Si es vista previa, añadir transparencia
         draw_color = color
@@ -256,28 +255,28 @@ class GameUI:
         
         # Título
         self.draw_text("Próximas Piezas", self.medium_font, TEXT_COLOR, 
-                       self.sidebar_x + 10, self.next_pieces_y - 25)
+                    self.sidebar_x + 10, self.next_pieces_y - 25)
         
         # Dibujar cada pieza en la lista
         for i, piece in enumerate(next_pieces):
             # Posición de cada pieza
-            piece_y = self.next_pieces_y + i * 60
+            piece_y: int = self.next_pieces_y + i * 60
             
             # Ajustar coordenadas para centrar la pieza en el panel
             rot_index = piece.rotation // 90
             shape = piece.shape[rot_index]
-            width = len(shape[0]) * self.next_piece_size
-            height = len(shape) * self.next_piece_size
+            width: float = len(shape[0]) * self.next_piece_size
+            height: float = len(shape) * self.next_piece_size
             
             # Centrar en x
-            piece_x = self.sidebar_x + (self.sidebar_width - width) // 2
+            piece_x: float = self.sidebar_x + (self.sidebar_width - width) // 2
             
             # Dibujar cada bloque
             for y in range(len(shape)):
                 for x in range(len(shape[0])):
                     if shape[y][x]:
-                        draw_x = piece_x + x * self.next_piece_size
-                        draw_y = piece_y + y * self.next_piece_size
+                        draw_x: float = piece_x + x * self.next_piece_size
+                        draw_y: float = piece_y + y * self.next_piece_size
                         pygame.draw.rect(
                             self.window,
                             piece.color,
@@ -303,7 +302,7 @@ class GameUI:
             highscore (int): Puntuación máxima
         """
         # Posición en y (debajo de próximas piezas)
-        y_pos = self.next_pieces_y + 250
+        y_pos: int = self.next_pieces_y + 250
         
         # Dibujar fondo
         pygame.draw.rect(
@@ -318,24 +317,24 @@ class GameUI:
         
         # Dibujar textos
         self.draw_text("Puntuación", self.medium_font, TEXT_COLOR, 
-                       self.sidebar_x + 10, y_pos + 10)
+                    self.sidebar_x + 10, y_pos + 10)
         self.draw_text(score_str, self.large_font, TEXT_COLOR, 
-                       self.sidebar_x + 10, y_pos + 40)
+                    self.sidebar_x + 10, y_pos + 40)
         
         self.draw_text("Nivel", self.medium_font, TEXT_COLOR, 
-                       self.sidebar_x + 10, y_pos + 80)
+                    self.sidebar_x + 10, y_pos + 80)
         self.draw_text(str(level), self.medium_font, TEXT_COLOR, 
-                       self.sidebar_x + 70, y_pos + 80)
+                    self.sidebar_x + 70, y_pos + 80)
         
         self.draw_text("Líneas", self.medium_font, TEXT_COLOR, 
-                       self.sidebar_x + 10, y_pos + 110)
+                    self.sidebar_x + 10, y_pos + 110)
         self.draw_text(str(lines), self.medium_font, TEXT_COLOR, 
-                       self.sidebar_x + 70, y_pos + 110)
+                    self.sidebar_x + 70, y_pos + 110)
         
         self.draw_text("Récord", self.medium_font, TEXT_COLOR, 
-                       self.sidebar_x + 10, y_pos + 140)
+                    self.sidebar_x + 10, y_pos + 140)
         self.draw_text(high_str, self.medium_font, TEXT_COLOR, 
-                       self.sidebar_x + 70, y_pos + 140)
+                    self.sidebar_x + 70, y_pos + 140)
     
     def draw_main_menu(self):
         """
@@ -345,31 +344,31 @@ class GameUI:
         self.window.fill(BG_COLOR)
         
         # Título
-        title_text = self.title_font.render("TETRIS", True, COLORS["I"])
-        title_rect = title_text.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 4))
+        title_text: pygame.Surface = self.title_font.render("TETRIS", True, COLORS["I"])
+        title_rect: pygame.Rect = title_text.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 4))
         self.window.blit(title_text, title_rect)
         
         # Opciones de menú
         for i, option in enumerate(self.menu_options["main"]):
             # Destacar opción seleccionada
             if i == self.selected_option:
-                color = COLORS["T"]
-                font = self.large_font
+                color: tuple[int, int, int] = COLORS["T"]
+                font: Font = self.large_font
             else:
                 color = TEXT_COLOR
                 font = self.medium_font
                 
             # Dibujar opción
-            option_text = font.render(option, True, color)
-            option_rect = option_text.get_rect(
+            option_text: pygame.Surface = font.render(option, True, color)
+            option_rect: pygame.Rect = option_text.get_rect(
                 center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2 + i * 50)
             )
             self.window.blit(option_text, option_rect)
             
         # Instrucciones
         instructions = "Usa ↑↓ para seleccionar, ENTER para confirmar"
-        inst_text = self.small_font.render(instructions, True, TEXT_COLOR)
-        inst_rect = inst_text.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT - 50))
+        inst_text: pygame.Surface = self.small_font.render(instructions, True, TEXT_COLOR)
+        inst_rect: pygame.Rect = inst_text.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT - 50))
         self.window.blit(inst_text, inst_rect)
     
     def draw_pause_menu(self):
@@ -382,23 +381,23 @@ class GameUI:
         self.window.blit(overlay, (0, 0))
         
         # Título del menú de pausa
-        title_text = self.large_font.render("PAUSA", True, TEXT_COLOR)
-        title_rect = title_text.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 3))
+        title_text: pygame.Surface = self.large_font.render("PAUSA", True, TEXT_COLOR)
+        title_rect: pygame.Rect = title_text.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 3))
         self.window.blit(title_text, title_rect)
         
         # Opciones de menú
         for i, option in enumerate(self.menu_options["pause"]):
             # Destacar opción seleccionada
             if i == self.selected_option:
-                color = COLORS["O"]
-                font = self.large_font
+                color: tuple[int, int, int] = COLORS["O"]
+                font: Font = self.large_font
             else:
                 color = TEXT_COLOR
                 font = self.medium_font
                 
             # Dibujar opción
-            option_text = font.render(option, True, color)
-            option_rect = option_text.get_rect(
+            option_text: pygame.Surface = font.render(option, True, color)
+            option_rect: pygame.Rect = option_text.get_rect(
                 center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2 + i * 50)
             )
             self.window.blit(option_text, option_rect)
@@ -418,15 +417,15 @@ class GameUI:
         self.window.blit(overlay, (0, 0))
         
         # Título
-        title_text = self.title_font.render("GAME OVER", True, COLORS["Z"])
-        title_rect = title_text.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 4))
+        title_text: pygame.Surface = self.title_font.render("GAME OVER", True, COLORS["Z"])
+        title_rect: pygame.Rect = title_text.get_rect(center=(WINDOW_WIDTH // 2, WINDOW_HEIGHT // 4))
         self.window.blit(title_text, title_rect)
         
         # Formatear puntuación
         score_str = self.score_manager.format_score(score)
         
         # Mostrar estadísticas
-        stats = [
+        stats: list[str] = [
             f"Puntuación: {score_str}",
             f"Nivel: {level}",
             f"Líneas: {lines}"
@@ -447,11 +446,11 @@ class GameUI:
         # Instrucciones
         if is_highscore:
             self.draw_text("Introduce tu nombre y presiona ENTER", 
-                          self.small_font, TEXT_COLOR, 
+                        self.small_font, TEXT_COLOR, 
                           WINDOW_WIDTH // 2, y_offset + 30, center=True)
         else:
             self.draw_text("Presiona ENTER para continuar", 
-                          self.small_font, TEXT_COLOR, 
+                        self.small_font, TEXT_COLOR, 
                           WINDOW_WIDTH // 2, y_offset + 30, center=True)
     
     def draw_text(self, text, font, color, x, y, center=False):
@@ -487,10 +486,10 @@ class GameUI:
         if event.type == pygame.KEYDOWN:
             # Navegación
             if event.key == pygame.K_UP:
-                self.selected_option = (self.selected_option - 1) % len(options)
+                self.selected_option: int = (self.selected_option - 1) % len(options)
                 return None
             elif event.key == pygame.K_DOWN:
-                self.selected_option = (self.selected_option + 1) % len(options)
+                self.selected_option: int = (self.selected_option + 1) % len(options)
                 return None
             # Selección
             elif event.key == pygame.K_RETURN:
@@ -522,8 +521,8 @@ class GameUI:
         self.window.fill(BG_COLOR)
         
         # Título
-        title_text = self.large_font.render("MEJORES PUNTUACIONES", True, COLORS["I"])
-        title_rect = title_text.get_rect(center=(WINDOW_WIDTH // 2, 50))
+        title_text: pygame.Surface = self.large_font.render("MEJORES PUNTUACIONES", True, COLORS["I"])
+        title_rect: pygame.Rect = title_text.get_rect(center=(WINDOW_WIDTH // 2, 50))
         self.window.blit(title_text, title_rect)
         
         # Obtener rankings
@@ -532,16 +531,16 @@ class GameUI:
         # Si no hay rankings, mostrar mensaje
         if not rankings:
             self.draw_text("No hay puntuaciones registradas aún", 
-                          self.medium_font, TEXT_COLOR, 
-                          WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2, center=True)
+                        self.medium_font, TEXT_COLOR, 
+                        WINDOW_WIDTH // 2, WINDOW_HEIGHT // 2, center=True)
         else:
             # Encabezados
-            headers = ["Pos", "Jugador", "Puntuación", "Nivel", "Fecha"]
-            header_widths = [50, 200, 150, 80, 200]
-            header_positions = []
+            headers: list[str] = ["Pos", "Jugador", "Puntuación", "Nivel", "Fecha"]
+            header_widths: list[int] = [50, 200, 150, 80, 200]
+            header_positions: list[int] = []
             
             # Calcular posiciones de encabezados
-            x_pos = (WINDOW_WIDTH - sum(header_widths)) // 2
+            x_pos: int = (WINDOW_WIDTH - sum(header_widths)) // 2
             for width in header_widths:
                 header_positions.append(x_pos)
                 x_pos += width
@@ -550,7 +549,7 @@ class GameUI:
             y_pos = 120
             for i, header in enumerate(headers):
                 self.draw_text(header, self.medium_font, COLORS["J"], 
-                              header_positions[i], y_pos)
+                            header_positions[i], y_pos)
             
             # Dibujar línea separadora
             pygame.draw.line(
@@ -566,25 +565,25 @@ class GameUI:
             for i, rank in enumerate(rankings):
                 # Posición
                 self.draw_text(f"{i+1}.", self.medium_font, TEXT_COLOR, 
-                              header_positions[0], y_pos)
+                            header_positions[0], y_pos)
                 
                 # Jugador
                 self.draw_text(rank["player"], self.medium_font, TEXT_COLOR, 
-                              header_positions[1], y_pos)
+                            header_positions[1], y_pos)
                 
                 # Puntuación
                 score_str = self.score_manager.format_score(rank["score"])
                 self.draw_text(score_str, self.medium_font, TEXT_COLOR, 
-                              header_positions[2], y_pos)
+                            header_positions[2], y_pos)
                 
                 # Nivel
                 self.draw_text(str(rank["level"]), self.medium_font, TEXT_COLOR, 
-                              header_positions[3], y_pos)
+                            header_positions[3], y_pos)
                 
                 # Fecha
                 date_str = rank["date"].split()[0]  # Solo la fecha, sin hora
                 self.draw_text(date_str, self.medium_font, TEXT_COLOR, 
-                              header_positions[4], y_pos)
+                            header_positions[4], y_pos)
                 
                 y_pos += 40
         

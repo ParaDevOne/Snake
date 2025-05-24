@@ -23,10 +23,10 @@ class ScoreManager:
             highscore_file (str): Nombre del archivo donde se guardan las puntuaciones
             max_records (int): Número máximo de récords a mantener
         """
-        self.highscore_file = highscore_file
-        self.max_records = max_records
-        self.current_score = 0
-        self.highscores = []
+        self.highscore_file: str = highscore_file
+        self.max_records: int = max_records
+        self.current_score: int = 0
+        self.highscores: list[dict] = []
         
         # Cargar puntuaciones previas
         self.load_highscores()
@@ -147,7 +147,7 @@ class ScoreManager:
             return False
             
         # Crear entrada de récord
-        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        timestamp: str = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         new_entry = {
             "player": player_name,
             "score": score,
@@ -192,4 +192,3 @@ class ScoreManager:
             
         # Formatear con separadores de miles
         return f"{score:,}".replace(",", ".")
-

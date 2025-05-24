@@ -19,7 +19,7 @@ class Board:
         si está ocupada, o None si está vacía.
         """
         # Crear un tablero vacío como una matriz 2D (GRID_HEIGHT x GRID_WIDTH)
-        self.grid = [[None for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
+        self.grid: list[list[None]] = [[None for _ in range(GRID_WIDTH)] for _ in range(GRID_HEIGHT)]
         
         # Inicializar la puntuación y líneas eliminadas
         self.score = 0
@@ -73,7 +73,7 @@ class Board:
             self.grid[y][x] = piece.color
             
         # Buscar y eliminar líneas completas
-        lines_removed = self.clear_lines()
+        lines_removed: int = self.clear_lines()
         
         # Actualizar puntuación
         self.update_score(lines_removed)

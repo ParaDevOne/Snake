@@ -24,20 +24,20 @@ class Piece:
         """
         # Si no se especifica una forma, elegir una al azar
         if shape_name is None:
-            self.shape_name = random.choice(list(SHAPES.keys()))
+            self.shape_name: str = random.choice(list(SHAPES.keys()))
         else:
             self.shape_name = shape_name
             
         # Establecer la forma y el color de la pieza
-        self.shape = SHAPES[self.shape_name]
-        self.color = COLORS[self.shape_name]
+        self.shape: list[list[list[int]]] = SHAPES[self.shape_name]
+        self.color: tuple[int, int, int] = COLORS[self.shape_name]
         
         # Establecer la rotación inicial (0, 90, 180 o 270 grados)
         self.rotation = 0
         
         # Calcular las dimensiones de la pieza según su forma
-        self.width = len(self.shape[0])
-        self.height = len(self.shape)
+        self.width: int = len(self.shape[0])
+        self.height: int = len(self.shape)
         
         # Establecer la posición inicial
         from constants import GRID_WIDTH
@@ -52,13 +52,13 @@ class Piece:
             list: Nueva representación de la pieza rotada.
         """
         # Actualizar rotación
-        self.rotation = (self.rotation + 90) % 360
+        self.rotation: int = (self.rotation + 90) % 360
         
         # Índice correspondiente a la rotación actual (0, 1, 2, 3)
-        rot_index = self.rotation // 90
+        rot_index: int = self.rotation // 90
         
         # Obtener la forma rotada
-        rotated_shape = SHAPES[self.shape_name][rot_index]
+        rotated_shape: list[list[int]] = SHAPES[self.shape_name][rot_index]
         
         # Actualizar dimensiones
         self.width = len(rotated_shape[0])
@@ -87,8 +87,8 @@ class Piece:
         """
         coords = []
         # Índice correspondiente a la rotación actual
-        rot_index = self.rotation // 90
-        shape = SHAPES[self.shape_name][rot_index]
+        rot_index: int = self.rotation // 90
+        shape: list[list[int]] = SHAPES[self.shape_name][rot_index]
         
         for i in range(len(shape)):
             for j in range(len(shape[0])):
@@ -110,7 +110,7 @@ class PieceGenerator:
         Args:
             queue_size (int): Tamaño de la cola de piezas siguientes.
         """
-        self.queue_size = queue_size
+        self.queue_size: int = queue_size
         self.next_pieces = []
         
         # Inicializar la cola de piezas
@@ -120,7 +120,7 @@ class PieceGenerator:
         """Rellena la cola de piezas hasta alcanzar el tamaño deseado."""
         while len(self.next_pieces) < self.queue_size:
             # Seleccionar una forma aleatoria
-            shape_name = random.choice(list(SHAPES.keys()))
+            shape_name: str = random.choice(list(SHAPES.keys()))
             # Crear una nueva pieza en una posición "fuera del tablero"
             # (solo para mostrar vista previa)
             self.next_pieces.append(Piece(shape_name=shape_name, x=0, y=0))

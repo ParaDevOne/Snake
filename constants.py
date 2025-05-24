@@ -11,8 +11,8 @@ import pygame
 # -----------------------------
 
 # Dimensiones de la ventana (píxeles)
-WINDOW_WIDTH = 1200
-WINDOW_HEIGHT = 800
+WINDOW_WIDTH = 800
+WINDOW_HEIGHT = 600
 
 # Dimensiones del tablero (celdas)
 GRID_WIDTH = 10
@@ -288,4 +288,3 @@ KEY_HARD_DROP: int = pygame.K_SPACE
 KEY_PAUSE: int = pygame.K_p
 KEY_ESCAPE: int = pygame.K_ESCAPE
 KEY_ENTER: int = pygame.K_RETURN
-
