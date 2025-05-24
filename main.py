@@ -20,8 +20,7 @@ from constants import (
     WINDOW_WIDTH, WINDOW_HEIGHT, FPS, 
     INITIAL_FALL_SPEED, FALL_SPEED_DECREMENT, MIN_FALL_SPEED,
     KEY_LEFT, KEY_RIGHT, KEY_DOWN, KEY_ROTATE, KEY_HARD_DROP,
-    KEY_PAUSE, KEY_ESCAPE, KEY_ENTER,
-    SCORE_SOFT_DROP, SCORE_HARD_DROP
+    KEY_PAUSE, KEY_ESCAPE, KEY_ENTER
 )
 
 # Configuración de logging
@@ -374,11 +373,7 @@ class Game:
             
             # Reiniciar contador
             self.fall_counter = 0
-            
-            # Sumar puntos si está activo el soft drop
-            if self.soft_drop_active:
-                self.score_manager.update_score(SCORE_SOFT_DROP)
-    
+
     def _apply_key_movement(self, key):
         """
         Aplica el movimiento según la tecla presionada.
@@ -445,10 +440,7 @@ class Game:
         """
         # Calcular la distancia que caerá la pieza
         distance = self.board.hard_drop(self.current_piece)
-        
-        # Añadir puntos por hard drop
-        self.score_manager.update_score(SCORE_HARD_DROP * distance)
-        
+
         # Fijar pieza al tablero
         if not self.board.add_piece(self.current_piece):
             # Game over si no se puede fijar la pieza
@@ -547,6 +539,7 @@ if __name__ == "__main__":
         # Configurar driver de video según el sistema operativo
         drivers: list[str] = []
         driver_set = False
+
         if os.name == 'nt':
             # Windows
             drivers = ['windows']
@@ -556,33 +549,30 @@ if __name__ == "__main__":
         elif sys.platform == "darwin":
             # macOS
             drivers = ['cocoa']
-        else:
-            # Otros sistemas
-            drivers = ['windows', 'wayland', 'cocoa']
 
+        for driver in drivers:
+            try:
+                os.environ["SDL_VIDEODRIVER"] = driver
+                pygame.display.init()
+                logging.info(f"Driver de video '{driver}' inicializado correctamente")
+                driver_set = True
+                break
+            except pygame.error:
+                logging.warning(f"No se pudo inicializar el driver '{driver}'")
+                pygame.display.quit()
 
-            for driver in drivers:
-                try:
-                    os.environ["SDL_VIDEODRIVER"] = driver
-                    pygame.display.init()
-                    logging.info(f"Driver de video '{driver}' inicializado correctamente")
-                    driver_set = True
-                    break
-                except pygame.error:
-                    logging.warning(f"No se pudo inicializar el driver '{driver}'")
-                    pygame.display.quit()
-            
-            if not driver_set:
-                logging.error("No se pudo inicializar ningún driver de video")
-                sys.exit(1)
-            
-            # Configuración de DPI para Windows
+        if not driver_set:
+            logging.error("No se pudo inicializar ningún driver de video")
+            sys.exit(1)
+
+        # Configuración de DPI para Windows
+        if os.name == 'nt':
             try:
                 import ctypes
                 ctypes.windll.user32.SetProcessDPIAware()
-            except:
+            except Exception:
                 logging.warning("No se pudo configurar DPI awareness")
-        
+
         # Mostrar información de versiones
         logging.info(f"Python versión: {sys.version}")
         logging.info(f"Pygame versión: {pygame.version.ver}")
