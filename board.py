@@ -112,11 +112,15 @@ class Board:
     def update_score(self, lines_removed):
         """
         Actualiza la puntuación basada únicamente en el número de líneas eliminadas.
+        Solo se obtienen puntos cuando se completan líneas.
+        
         Args:
             lines_removed (int): Número de líneas eliminadas
         """
+        # Si no se eliminaron líneas, no se otorgan puntos
         if lines_removed == 0:
             return
+            
         # Calcular puntos solo por líneas eliminadas
         points = 0
         if lines_removed == 1:
@@ -127,6 +131,7 @@ class Board:
             points = SCORE_TRIPLE
         elif lines_removed >= 4:
             points = SCORE_TETRIS
+            
         # Multiplicar puntos por nivel actual
         self.score += points * self.level
     
@@ -194,7 +199,7 @@ class Board:
         # Mover la pieza a la posición más baja
         piece.y = lowest_y
         
-        # Calcular la distancia recorrida (para puntos extra)
+        # Calcular la distancia recorrida (solo para información)
         distance = lowest_y - original_y
         
         return distance
