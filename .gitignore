@@ -24,17 +24,17 @@ wheels/
 *.log
 tetris.log
 highscores.json
+config.json
 logs/
 data/
 
 # Archivos temporales y de entorno
 .env
 .venv
-venv/
+.venv/*
+venv/*
 ENV/
 env/
-.idea/
-.vscode/
 *.swp
 *.swo
 *~
