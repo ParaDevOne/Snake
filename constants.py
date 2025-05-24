@@ -11,18 +11,18 @@ import pygame
 # -----------------------------
 
 # Dimensiones de la ventana (píxeles)
-WINDOW_WIDTH = 800
-WINDOW_HEIGHT = 600
+WINDOW_WIDTH: Literal[800] = 800
+WINDOW_HEIGHT: Literal[600] = 600
 
 # Dimensiones del tablero (celdas)
-GRID_WIDTH = 10
-GRID_HEIGHT = 20
+GRID_WIDTH: Literal[10] = 10
+GRID_HEIGHT: Literal[20] = 20
 
 # Tamaño de celda (píxeles)
-CELL_SIZE = 25
+CELL_SIZE: Literal[25] = 25
 
 # FPS objetivo
-FPS = 60
+FPS: Literal[60] = 60
 
 # -----------------------------
 # Colores (RGB)
@@ -51,7 +51,7 @@ BORDER_COLOR: tuple[Literal[80], Literal[80], Literal[80]] = (80, 80, 80)    # G
 # -----------------------------
 
 # Velocidad (frames por caída de pieza)
-INITIAL_FALL_SPEED = 50     # Más alto = más lento
+INITIAL_FALL_SPEED = 150     # Más alto = más lento
 FALL_SPEED_DECREMENT = 5    # Disminución de velocidad por nivel
 MIN_FALL_SPEED = 1          # Velocidad mínima (más rápido)
 
