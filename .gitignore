@@ -1,17 +1,10 @@
 # Archivos compilados de Python
 __pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
 build/
-develop-eggs/
 dist/
-downloads/
 eggs/
 .eggs/
 lib/
-lib64/
 parts/
 sdist/
 var/
@@ -40,4 +33,3 @@ env/
 *~
 .DS_Store
 Thumbs.db
-
