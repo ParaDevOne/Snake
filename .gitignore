@@ -20,6 +20,7 @@ highscores.json
 config.json
 logs/
 data/
+config.json.bakup
 
 # Archivos temporales y de entorno
 .env
