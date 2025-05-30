@@ -13,7 +13,6 @@ from board import Board
 from pieces import PieceGenerator, Piece
 from score import ScoreManager
 from ui import GameUI
-from config import ConfigManager, ConfigUI
 from constants import FPS
 
 # Configuración de logging
@@ -51,18 +50,14 @@ class Game:
         Inicializa el juego Tetris.
         """
         try:
-            # Inicializar gestor de configuración
-            self.config_manager = ConfigManager()
-            
             # Información del entorno
             logging.info(f"Sistema operativo: {os.name}")
             logging.info(f"Directorio actual: {os.getcwd()}")
-            
+
             # Inicializar componentes del juego
             self.score_manager = ScoreManager()
             self.ui = GameUI(self.score_manager)
-            self.config_ui = ConfigUI(self.ui.window, self.config_manager, self.ui)
-            
+
             # Configuración inicial
             self.clock = pygame.time.Clock()
             self.running = True
@@ -93,16 +88,14 @@ class Game:
         self.board = Board()
         
         # Generador de piezas con vista previa configurada
-        preview_count = self.config_manager.get_value("game", "next_pieces_preview")
-        if preview_count is None:
-            preview_count = 3  # Valor por defecto si no está configurado
+        preview_count = 3  # Valor por defecto
         self.piece_generator = PieceGenerator(int(preview_count))
         
         # Pieza actual
         self.current_piece = self.piece_generator.get_next_piece()
         
         # Velocidad de caída inicial desde configuración
-        self.fall_speed = self.config_manager.get_value("game", "initial_fall_speed")
+        self.fall_speed = 30  # Valor por defecto
         self.fall_counter = 0
         
         # Activar soft drop (caída rápida)
@@ -244,48 +237,34 @@ class Game:
             event (pygame.event.Event): Evento a manejar
         """
         if event.type == pygame.KEYDOWN:
-            # Obtener controles configurados
-            pause_key = self.config_manager.get_value("controls", "pause")
-            exit_key = self.config_manager.get_value("controls", "exit")
-            hard_drop_key = self.config_manager.get_value("controls", "hard_drop")
-            move_down_key = self.config_manager.get_value("controls", "move_down")
-            
+            # Controles fijos
+            pause_key = pygame.K_p
+            exit_key = pygame.K_ESCAPE
+            hard_drop_key = pygame.K_SPACE
+            move_down_key = pygame.K_DOWN
+
             # Pausa
             if event.key == pause_key:
                 self.state = GameState.PAUSED
                 self.ui.selected_option = 0
                 return
-                
-            # Salir al menú
             elif event.key == exit_key:
                 self.state = GameState.MENU
                 self.ui.selected_option = 0
                 return
-                
-            # Hard drop (caída instantánea)
             elif event.key == hard_drop_key:
                 self._perform_hard_drop()
                 return
-                
-            # Activar soft drop
             elif event.key == move_down_key:
                 self.soft_drop_active = True
-                
-            # Guardar la última tecla presionada para repetición
+
             self.last_key = event.key
             self.last_key_time: int = pygame.time.get_ticks()
-            
-            # Aplicar el movimiento inmediatamente
             self._apply_key_movement(event.key)
-                
         elif event.type == pygame.KEYUP:
-            # Obtener tecla de movimiento hacia abajo configurada
-            move_down_key = self.config_manager.get_value("controls", "move_down")
-            # Desactivar soft drop
+            move_down_key = pygame.K_DOWN
             if event.key == move_down_key:
                 self.soft_drop_active = False
-                
-            # Limpiar última tecla si coincide con la que se soltó
             if event.key == self.last_key:
                 self.last_key = None
     
@@ -345,7 +324,7 @@ class Game:
             event (pygame.event.Event): Evento a manejar
         """
         if event.type == pygame.KEYDOWN:
-            exit_key = self.config_manager.get_value("controls", "exit")
+            exit_key = pygame.K_ESCAPE
             if event.key == exit_key:
                 self.state = GameState.MENU
                 self.ui.selected_option = 0
@@ -357,13 +336,9 @@ class Game:
         Args:
             event (pygame.event.Event): Evento a manejar
         """
-        result = self.config_ui.handle_input(event)
-        if result in ["save", "cancel"]:
-            self.state = GameState.MENU
-            self.ui.selected_option = 0
-        elif result == "reset":
-            # Recargar la configuración después de reset
-            self.config_manager.load_config()
+        # Ya no hay configuración, volver al menú
+        self.state = GameState.MENU
+        self.ui.selected_option = 0
     
     def _update(self):
         """
@@ -385,19 +360,10 @@ class Game:
             # Actualizar tiempo con intervalo de repetición
             self.last_key_time = current_time - (self.key_repeat_interval - self.key_repeat_delay)
         
-        # Calcular velocidad de caída según nivel usando configuración
-        fall_speed_decrement = self.config_manager.get_value("game", "fall_speed_decrement")
-        if fall_speed_decrement is None:
-            fall_speed_decrement = 1  # Valor por defecto
-
-        min_fall_speed = self.config_manager.get_value("game", "min_fall_speed")
-        if min_fall_speed is None:
-            min_fall_speed = 5  # Valor por defecto
-
-        initial_fall_speed = self.config_manager.get_value("game", "initial_fall_speed")
-        if initial_fall_speed is None:
-            initial_fall_speed = 30  # Valor por defecto
-        
+        # Valores fijos para la velocidad
+        fall_speed_decrement = 1
+        min_fall_speed = 5
+        initial_fall_speed = 30
         level_fall_speed: int = max(
             int(min_fall_speed),
             int(initial_fall_speed) - (self.board.level - 1) * int(fall_speed_decrement)
@@ -424,10 +390,10 @@ class Game:
         Args:
             key (int): Código de la tecla presionada
         """
-        # Obtener controles configurados
-        move_left = self.config_manager.get_value("controls", "move_left")
-        move_right = self.config_manager.get_value("controls", "move_right")
-        rotate = self.config_manager.get_value("controls", "rotate")
+        # Controles fijos
+        move_left = pygame.K_LEFT
+        move_right = pygame.K_RIGHT
+        rotate = pygame.K_UP
         
         # Guardar posición anterior para comprobar colisiones
         original_x = self.current_piece.x
@@ -528,13 +494,8 @@ class Game:
             # Mostrar entrada de texto si es récord
             if self.score_manager.is_highscore():
                 # Obtener dimensiones de ventana desde configuración
-                window_width = self.config_manager.get_value("visual", "window_width")
-                window_height = self.config_manager.get_value("visual", "window_height")
-                # Proveer valores por defecto si son None
-                if window_width is None:
-                    window_width = 800
-                if window_height is None:
-                    window_height = 600
+                window_width = 800
+                window_height = 600
                 
                 # Fondo para texto
                 text_bg_rect = pygame.Rect(
@@ -562,7 +523,7 @@ class Game:
         elif self.state == GameState.RANKINGS:
             self.ui.draw_rankings()
         elif self.state == GameState.SETTINGS:
-            self.config_ui.draw()
+            pass  # Ya no hay config_ui
         
         # Actualizar pantalla
         pygame.display.flip()

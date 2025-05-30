@@ -73,7 +73,7 @@ class GameUI:
         
         # Opciones de menú
         self.menu_options: dict[str, list[str]] = {
-            "main": ["Jugar", "Rankings", "Configuración", "Salir"],
+            "main": ["Jugar", "Rankings", "Salir"],
             "pause": ["Continuar", "Reiniciar", "Salir al Menú"]
         }
         self.selected_option = 0
