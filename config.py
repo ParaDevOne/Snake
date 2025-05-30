@@ -8,7 +8,7 @@ import pygame
 from typing import Dict, Any, Optional, Tuple, List, Literal
 
 # Configuración por defecto
-DEFAULT_CONFIG = {
+DEFAULT_CONFIG: dict[str, Any] = {
     # Ajustes de juego
     "game": {
         "initial_fall_speed": 150,  # Velocidad inicial (frames por caída)
@@ -121,7 +121,7 @@ class ConfigManager:
         Args:
             config_file (str): Ruta al archivo de configuración
         """
-        self.config_file = config_file
+        self.config_file: str = config_file
         self.config = DEFAULT_CONFIG.copy()
         
         # Cargar configuración existente
@@ -158,7 +158,7 @@ class ConfigManager:
             return False
     
     # Definición de rangos válidos para validación
-    _CONFIG_RANGES = {
+    _CONFIG_RANGES: Dict[str, Dict[str, Dict[str, int]]] = {
         "game": {
             "initial_fall_speed": {"min": 10, "max": 300},
             "fall_speed_decrement": {"min": 1, "max": 20},
@@ -191,7 +191,7 @@ class ConfigManager:
         
         # Validar rango para valores numéricos
         if isinstance(value, (int, float)) and section in self._CONFIG_RANGES and key in self._CONFIG_RANGES[section]:
-            range_info = self._CONFIG_RANGES[section][key]
+            range_info: Dict[str, int] = self._CONFIG_RANGES[section][key]
             if value < range_info["min"] or value > range_info["max"]:
                 return False, f"Valor fuera de rango para {section}.{key}: debe estar entre {range_info['min']} y {range_info['max']}"
         
