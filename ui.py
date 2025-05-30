@@ -1,8 +1,5 @@
 # ui.py
 # Módulo para manejar la interfaz gráfica del Tetris
-# Autor: [ParaDevOne]
-# Fecha: Mayo 2025
-# Licencia: Simplified Open License (SOL) v1.0
 
 import pygame
 import logging
@@ -76,7 +73,7 @@ class GameUI:
         
         # Opciones de menú
         self.menu_options: dict[str, list[str]] = {
-            "main": ["Jugar", "Rankings", "Salir"],
+            "main": ["Jugar", "Rankings", "Configuración", "Salir"],
             "pause": ["Continuar", "Reiniciar", "Salir al Menú"]
         }
         self.selected_option = 0
