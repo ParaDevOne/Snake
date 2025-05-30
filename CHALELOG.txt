@@ -16,11 +16,14 @@
 - Opción para cambiar el color de fondo del tablero.
 - Corrección de bug: las piezas ya no se quedan atascadas al rotar cerca de los bordes.
 
-## v1.2 (próxima)
+## v1.2 (31-05-2025)
 - Soporte experimental para MacOS.
-- Vista rápida de controles desde el menú principal.
+- Splash screen al inicio del juego.
+
+## v1.3 (01-06-2025)
+- Mejora en la detección de colisiones de piezas.
+- Añadido modo de juego rápido (sin puntuación).
 - Mejora en la animación de eliminación de líneas.
-- Guardado automático de la partida al salir.
 
 ## Próximas versiones
 - Nuevos efectos de sonido y música.
