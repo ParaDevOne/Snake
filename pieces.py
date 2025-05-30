@@ -1,8 +1,5 @@
 # pieces.py
 # Módulo para manejar las piezas de Tetris
-# Autor: [ParaDevOne]
-# Fecha: Mayo 2025
-# Licencia: Simplified Open License (SOL) v1.0
 
 import random
 from constants import COLORS, SHAPES
